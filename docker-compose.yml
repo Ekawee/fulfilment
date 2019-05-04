@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  warehouse:
+    build: ./warehouse
+    command: bash  -c 'npm install && npm run dev'
+    image: fulfilment/warehouse
+    volumes:
+      - './warehouse:/usr/src/app'
+    ports:
+      - '9000:8080'
+    networks:
+      - fulfilment
+    depends_on:
+      - warehouse-db
+    environment:
+      POSTGRES_USER: 'api'
+      POSTGRES_PASSWORD: 'api'
+      POSTGRES_DB: 'fulfilment'
+      POSTGRES_HOST: 'warehouse-db'
+      MACHINE_AUTHEN_KEY: '7bc18f1b229aedc236096bd53ecacc4f'
+      ENABLE_SWAGGER: 'true'
+  warehouse-db:
+    image: postgres:9.6
+    volumes:
+      - 'postgres-warehouse-db:/var/lib/postgresql/data/pgdata'
+    ports:
+      - '5001:5432'
+    networks:
+      - fulfilment
+    environment:
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+      POSTGRES_USER: 'api'
+      POSTGRES_PASSWORD: 'api'
+      POSTGRES_DB: 'fulfilment'
+volumes:
+  warehouse:
+  postgres-warehouse-db:
+networks:
+  fulfilment:
