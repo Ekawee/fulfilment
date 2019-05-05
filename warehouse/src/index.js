@@ -7,7 +7,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 // import controller from './controller';
 import config from './config';
 import winston from './winston';
-import authenticate from './middleware/authenticate';
+import machineAuthenticate from './middleware/machine-authenticate';
 import errorHandler from './middleware/error-handler';
 import bodyParser from './middleware/body-parser';
 import { version } from '../package.json';
@@ -15,15 +15,18 @@ import { version } from '../package.json';
 const app = express();
 app.server = http.createServer(app);
 
-app.get(`/api/${version}/health-check`, (_, res) => {
-  res.json({ version });
-});
+app.get(
+  `/api/${version}/health-check`,
+  machineAuthenticate,
+  (_, res) => {
+    res.json({ version });
+  }
+);
 
 app.use(contextService.middleware('request'));
 app.use(compression());
 app.use(bodyParser(config));
 app.use(winston.loggerExpress);
-app.use(authenticate);
 
 if (config.enableSwagger) {
   // https://github.com/Surnet/swagger-jsdoc/blob/master/docs/GETTING-STARTED.md
