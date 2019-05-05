@@ -20,6 +20,7 @@ services:
       POSTGRES_HOST: 'warehouse-db'
       MACHINE_AUTHEN_VALUE: '7bc18f1b229aedc236096bd53ecacc4f'
       ENABLE_SWAGGER: 'true'
+      IS_ENABLE_DB_LOGGING: 'true'
   warehouse-db:
     image: postgres:9.6
     volumes:
