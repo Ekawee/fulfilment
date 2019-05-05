@@ -1,4 +1,4 @@
-import sequelize from '../util/sequelize';
+import sequelizeUtil from '../util/sequelize';
 
 const tableName = {
   inventoryType: 'inventoryType',
@@ -17,7 +17,7 @@ const tableName = {
 const inventoryType = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.inventoryType,
-    sequelize.withDefaultTableFields({
+    sequelizeUtil.withDefaultTableFields({
       name: { type: Sequelize.STRING },
     }, Sequelize),
     { transaction },
@@ -26,8 +26,8 @@ const inventoryType = (queryInterface, Sequelize, transaction) =>
 const inventoryTypePrice = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.inventoryTypePrice,
-    sequelize.withDefaultTableFields({
-      inventoryTypeId: sequelize.withForeignKey({ model: tableName.inventoryType }, Sequelize),
+    sequelizeUtil.withDefaultTableFields({
+      inventoryTypeId: sequelizeUtil.withForeignKey({ model: tableName.inventoryType }, Sequelize),
       effectiveDate: { type: Sequelize.DATE },
       expiryDate: { type: Sequelize.DATE },
       price: { type: Sequelize.DECIMAL(10, 2) },
@@ -41,7 +41,7 @@ const inventoryTypePrice = (queryInterface, Sequelize, transaction) =>
 const customer = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.customer,
-    sequelize.withDefaultTableFields({
+    sequelizeUtil.withDefaultTableFields({
       uid: { type: Sequelize.STRING },
       firstName: { type: Sequelize.STRING },
       lastName: { type: Sequelize.STRING },
@@ -55,8 +55,8 @@ const customer = (queryInterface, Sequelize, transaction) =>
 const depositReceipt = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.depositReceipt,
-    sequelize.withDefaultTableFields({
-      customerId: sequelize.withForeignKey({ model: tableName.customer }, Sequelize),
+    sequelizeUtil.withDefaultTableFields({
+      customerId: sequelizeUtil.withForeignKey({ model: tableName.customer }, Sequelize),
       depositReceiptNumber: { type: Sequelize.STRING },
     }, Sequelize),
     { transaction },
@@ -65,7 +65,7 @@ const depositReceipt = (queryInterface, Sequelize, transaction) =>
 const shipment = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.shipment,
-    sequelize.withDefaultTableFields({
+    sequelizeUtil.withDefaultTableFields({
       name: { type: Sequelize.STRING },
       address: { type: Sequelize.STRING },
       mobileNumber: { type: Sequelize.STRING },
@@ -77,9 +77,9 @@ const shipment = (queryInterface, Sequelize, transaction) =>
 const dispatchReceipt = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.dispatchReceipt,
-    sequelize.withDefaultTableFields({
-      customerId: sequelize.withForeignKey({ model: tableName.customer }, Sequelize),
-      shipmentId: sequelize.withForeignKey({ model: tableName.shipment }, Sequelize),
+    sequelizeUtil.withDefaultTableFields({
+      customerId: sequelizeUtil.withForeignKey({ model: tableName.customer }, Sequelize),
+      shipmentId: sequelizeUtil.withForeignKey({ model: tableName.shipment }, Sequelize),
       dispatchReceiptNumber: { type: Sequelize.STRING },
       paymentReference: { type: Sequelize.STRING },
       depositAmount: { type: Sequelize.DECIMAL(10, 2) },
@@ -92,10 +92,10 @@ const dispatchReceipt = (queryInterface, Sequelize, transaction) =>
 const inventory = (queryInterface, Sequelize, transaction) =>
 queryInterface.createTable(
   tableName.inventory,
-  sequelize.withDefaultTableFields({
-    inventoryTypeId: sequelize.withForeignKey({ model: tableName.inventoryType }, Sequelize),
-    depositReceiptId: sequelize.withForeignKey({ model: tableName.depositReceipt }, Sequelize),
-    dispatchReceiptId: sequelize.withForeignKey({ model: tableName.dispatchReceipt }, Sequelize),
+  sequelizeUtil.withDefaultTableFields({
+    inventoryTypeId: sequelizeUtil.withForeignKey({ model: tableName.inventoryType }, Sequelize),
+    depositReceiptId: sequelizeUtil.withForeignKey({ model: tableName.depositReceipt }, Sequelize),
+    dispatchReceiptId: sequelizeUtil.withForeignKey({ model: tableName.dispatchReceipt }, Sequelize),
     width: { type: Sequelize.DECIMAL(10, 2) },
     height: { type: Sequelize.DECIMAL(10, 2) },
     length: { type: Sequelize.DECIMAL(10, 2) },
@@ -112,7 +112,7 @@ queryInterface.createTable(
 const user = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.user,
-    sequelize.withDefaultTableFields({
+    sequelizeUtil.withDefaultTableFields({
       uid: { type: Sequelize.STRING },
       role: { type: Sequelize.STRING },
       firstName: { type: Sequelize.STRING },
@@ -124,9 +124,9 @@ const user = (queryInterface, Sequelize, transaction) =>
 const inventoryAudit = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.inventoryAudit,
-    sequelize.withDefaultTableFields({
-      inventoryId: sequelize.withForeignKey({ model: tableName.inventory }, Sequelize),
-      userId: sequelize.withForeignKey({ model: tableName.user }, Sequelize),
+    sequelizeUtil.withDefaultTableFields({
+      inventoryId: sequelizeUtil.withForeignKey({ model: tableName.inventory }, Sequelize),
+      userId: sequelizeUtil.withForeignKey({ model: tableName.user }, Sequelize),
       action: { type: Sequelize.STRING },
       status: { type: Sequelize.STRING },
       remark: { type: Sequelize.TEXT },
@@ -137,9 +137,9 @@ const inventoryAudit = (queryInterface, Sequelize, transaction) =>
 const customerAudit = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.inventoryAudit,
-    sequelize.withDefaultTableFields({
-      customerId: sequelize.withForeignKey({ model: tableName.customer }, Sequelize),
-      userId: sequelize.withForeignKey({ model: tableName.user }, Sequelize),
+    sequelizeUtil.withDefaultTableFields({
+      customerId: sequelizeUtil.withForeignKey({ model: tableName.customer }, Sequelize),
+      userId: sequelizeUtil.withForeignKey({ model: tableName.user }, Sequelize),
       previousInformation: { type: Sequelize.TEXT },
       currentInformation: { type: Sequelize.TEXT },
       remark: { type: Sequelize.STRING },
@@ -150,7 +150,7 @@ const customerAudit = (queryInterface, Sequelize, transaction) =>
 const payment = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
     tableName.payment,
-    sequelize.withDefaultTableFields({
+    sequelizeUtil.withDefaultTableFields({
       paymentReference: { type: Sequelize.STRING },
       amount: { type: Sequelize.DECIMAL(10, 2) },
       status: { type: Sequelize.STRING },
@@ -178,18 +178,20 @@ export default {
   },
 
   down: (queryInterface) => {
-    return Promise.all([
-      queryInterface.dropTable(tableName.inventoryType),
-      queryInterface.dropTable(tableName.inventoryTypePrice),
-      queryInterface.dropTable(tableName.customer),
-      queryInterface.dropTable(tableName.depositReceipt),
-      queryInterface.dropTable(tableName.shipment),
-      queryInterface.dropTable(tableName.dispatchReceipt),
-      queryInterface.dropTable(tableName.inventory),
-      queryInterface.dropTable(tableName.user),
-      queryInterface.dropTable(tableName.inventoryAudit),
-      queryInterface.dropTable(tableName.customerAudit),
-      queryInterface.dropTable(tableName.v),
-    ]);
+    return queryInterface.sequelize.transaction((transaction) => {
+      return Promise.all([
+        queryInterface.dropTable(tableName.payment, { transaction }),
+        queryInterface.dropTable(tableName.customerAudit, { transaction }),
+        queryInterface.dropTable(tableName.inventoryAudit, { transaction }),
+        queryInterface.dropTable(tableName.user, { transaction }),
+        queryInterface.dropTable(tableName.inventory, { transaction }),
+        queryInterface.dropTable(tableName.dispatchReceipt, { transaction }),
+        queryInterface.dropTable(tableName.shipment, { transaction }),
+        queryInterface.dropTable(tableName.depositReceipt, { transaction }),
+        queryInterface.dropTable(tableName.customer, { transaction }),
+        queryInterface.dropTable(tableName.inventoryTypePrice, { transaction }),
+        queryInterface.dropTable(tableName.inventoryType, { transaction }),
+      ]);
+    });
   },
 };

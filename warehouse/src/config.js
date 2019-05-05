@@ -13,6 +13,7 @@ const config = {
   dbPassword: env.POSTGRES_PASSWORD,
   machineAuthenValue: env.MACHINE_AUTHEN_VALUE,
   enableSwagger: env.ENABLE_SWAGGER,
+  isEnableDBlogging: env.IS_ENABLE_DB_LOGGING,
 };
 
 export default config;
