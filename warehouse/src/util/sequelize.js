@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 const withDefaultTableFields = (customizeFields, sequelize) => ({
   id: {
     allowNull: false,
@@ -21,7 +23,14 @@ const withForeignKey = ({ model, key = 'id' }, sequelize) => ({
   onDelete: 'SET NULL',
 });
 
+const withInsertTimeStamp = (data) => ({
+  ...data,
+  createdAt: DateTime.utc().toISO(),
+  updatedAt: DateTime.utc().toISO(),
+});
+
 export default {
   withDefaultTableFields,
   withForeignKey,
+  withInsertTimeStamp,
 };

@@ -7,6 +7,8 @@ const sequelizeConfig = {
   host: config.dbHost,
   dialect: 'postgres',
   operatorsAliases: false,
+  seederStorage: 'sequelize',
+  seederStorageTableName: 'SequelizeMeta',
 };
 
 export const development = sequelizeConfig;

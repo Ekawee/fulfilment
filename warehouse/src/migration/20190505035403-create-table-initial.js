@@ -136,7 +136,7 @@ const inventoryAudit = (queryInterface, Sequelize, transaction) =>
 
 const customerAudit = (queryInterface, Sequelize, transaction) =>
   queryInterface.createTable(
-    tableName.inventoryAudit,
+    tableName.customerAudit,
     sequelizeUtil.withDefaultTableFields({
       customerId: sequelizeUtil.withForeignKey({ model: tableName.customer }, Sequelize),
       userId: sequelizeUtil.withForeignKey({ model: tableName.user }, Sequelize),

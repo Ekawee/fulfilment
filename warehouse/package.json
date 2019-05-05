@@ -4,7 +4,7 @@
   "description": "Fulfilment project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "migrate": "npm run clean && npm run build && sequelize db:migrate",
+    "migrate": "npm run clean && npm run build && sequelize db:migrate && sequelize db:seed:all",
     "dev": "npm run migrate && webpack --watch",
     "clean": "rm -rf dist && rm -rf build",
     "build": "babel src -D -d dist",
