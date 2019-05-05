@@ -1,8 +1,7 @@
 import { getOr } from 'lodash/fp';
-import logger from '../winston';
+import winston from '../winston';
 
-// NOTE: HERE is required to have next
-export default async (err, req, res, next) => { //eslint-disable-line
+export default async (err, req, res) => {
   const { name: type, message, status, messageCode } = err;
   const code = status || 500;
   const errors = getOr(message, ['errors'], err);
@@ -13,6 +12,6 @@ export default async (err, req, res, next) => { //eslint-disable-line
     message,
     messageCode,
   };
-  logger.error('Exception Middleware', { originalErr: err, payloadError });
+  winston.logger.error('Exception Middleware', { originalErr: err, payloadError });
   res.status(code).json(payloadError);
 };

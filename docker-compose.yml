@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: 'api'
       POSTGRES_DB: 'fulfilment'
       POSTGRES_HOST: 'warehouse-db'
-      MACHINE_AUTHEN_KEY: '7bc18f1b229aedc236096bd53ecacc4f'
+      MACHINE_AUTHEN_VALUE: '7bc18f1b229aedc236096bd53ecacc4f'
       ENABLE_SWAGGER: 'true'
   warehouse-db:
     image: postgres:9.6

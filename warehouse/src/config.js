@@ -11,7 +11,7 @@ const config = {
   dbScheme: env.POSTGRES_DB,
   dbUser: env.POSTGRES_USER,
   dbPassword: env.POSTGRES_PASSWORD,
-  machineAuthenKey: env.MACHINE_AUTHEN_KEY,
+  machineAuthenValue: env.MACHINE_AUTHEN_VALUE,
   enableSwagger: env.ENABLE_SWAGGER,
 };
 
