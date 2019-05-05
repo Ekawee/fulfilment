@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "migrate": "npm run clean && npm run build && sequelize db:migrate",
-    "dev": "npm run clean && npm run build && webpack --watch",
+    "dev": "npm run migrate && webpack --watch",
     "clean": "rm -rf dist && rm -rf build",
     "build": "babel src -D -d dist",
     "start": "NODE_ENV=production node dist",
