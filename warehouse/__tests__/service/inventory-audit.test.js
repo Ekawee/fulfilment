@@ -60,7 +60,7 @@ describe('/service/inventoryAudit/logAdded', () => {
         expect.objectContaining(mockModelOptions),
       );
 
-      expect(model.inventoryAudit.create).toHaveReturnedWith(
+      expect(model.inventoryAudit.create).toHaveNthReturnedWith(i+1,
         expect.objectContaining(mockInventionAuditResponse[i])
       );
     }
