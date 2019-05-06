@@ -5,6 +5,12 @@ import model from '../model';
 import DatetimeUtil from '../util/datetime';
 import { UNIT_MEASURE_TYPE } from '../constants';
 
+/*
+ * Calculate deposit inventory cost.
+ * @param1 inventory id
+ * @param2 sequelize model options
+ * @return deposit price to calculate and deposit preriods.
+ */
 const calculateInventoryDeposited = async (inventoryId, modelOptions) => {
   const { transaction } = modelOptions;
 
@@ -70,6 +76,17 @@ const calculateInventoryDeposited = async (inventoryId, modelOptions) => {
   };
 };
 
+/*
+ * Calculate shipment price. To base on:
+ * - location(country, zipcode).
+ * - shipment type
+ * - shpiping provider.
+ *
+ * For now, I will hardcode for shipment price.
+ */
+const calculateShipment = () => 20;
+
 export default {
   calculateInventoryDeposited,
+  calculateShipment,
 };
