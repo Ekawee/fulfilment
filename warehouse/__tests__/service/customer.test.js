@@ -4,7 +4,7 @@ import model from '../../src/model';
 jest.mock('../../src/model', () => ({
   customer: {
     create: jest.fn(),
-    findById: jest.fn(),
+    findByPk: jest.fn(),
   },
 }));
 
@@ -14,7 +14,7 @@ const defaultModelAttributes = {
   deletedAt: null,
 };
 
-describe('/service/customer/findByIdOrCreate', () => {
+describe('/service/customer/findByPkOrCreate', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -38,19 +38,19 @@ describe('/service/customer/findByIdOrCreate', () => {
       ...defaultModelAttributes,
     };
 
-    model.customer.findById = jest.fn(() => mockCustomerResponse);
-    const result = await serviceCustomer.findByIdOrCreate(mockRequest, mockModelOptions);
+    model.customer.findByPk = jest.fn(() => mockCustomerResponse);
+    const result = await serviceCustomer.findByPkOrCreate(mockRequest, mockModelOptions);
 
-    expect(model.customer.findById).toHaveBeenCalledWith(
+    expect(model.customer.findByPk).toHaveBeenCalledWith(
       mockRequest.id,
       expect.objectContaining(mockModelOptions),
     );
 
-    expect(model.customer.findById).toHaveReturnedWith(
+    expect(model.customer.findByPk).toHaveReturnedWith(
       expect.objectContaining(mockCustomerResponse),
     );
 
-    expect(model.customer.findById).toHaveBeenCalledTimes(1);
+    expect(model.customer.findByPk).toHaveBeenCalledTimes(1);
 
     expect(model.customer.create).not.toHaveBeenCalled();
 
@@ -78,7 +78,7 @@ describe('/service/customer/findByIdOrCreate', () => {
     };
 
     model.customer.create = jest.fn(() => mockCustomerResponse);
-    const result = await serviceCustomer.findByIdOrCreate(mockRequest, mockModelOptions);
+    const result = await serviceCustomer.findByPkOrCreate(mockRequest, mockModelOptions);
 
     expect(model.customer.create).toHaveBeenCalledWith(
       expect.objectContaining(mockRequest),
@@ -91,7 +91,7 @@ describe('/service/customer/findByIdOrCreate', () => {
 
     expect(model.customer.create).toHaveBeenCalledTimes(1);
 
-    expect(model.customer.findById).not.toHaveBeenCalled();
+    expect(model.customer.findByPk).not.toHaveBeenCalled();
 
     expect(result).toEqual(mockCustomerResponse);
 

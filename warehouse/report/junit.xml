@@ -1,24 +1,30 @@
-<testsuites name="jest tests" tests="8" failures="0" time="2.528">
-  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-06T06:49:48" time="0.685" tests="4">
-    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.006">
+<testsuites name="jest tests" tests="10" failures="0" time="2.727">
+  <testsuite name="/service/inventoryAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-06T09:21:59" time="0.71" tests="2">
+    <testcase classname="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" name="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" time="0.008">
+    </testcase>
+    <testcase classname="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" name="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-06T09:22:00" time="0.139" tests="2">
+    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.02">
+    </testcase>
+    <testcase classname="/service/inventory/deposit should deposited inventory with NEW customer correctly" name="/service/inventory/deposit should deposited inventory with NEW customer correctly" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/customer/findByPkOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-06T09:22:00" time="0.089" tests="2">
+    <testcase classname="/service/customer/findByPkOrCreate should return EXIST customer" name="/service/customer/findByPkOrCreate should return EXIST customer" time="0.002">
+    </testcase>
+    <testcase classname="/service/customer/findByPkOrCreate should return NEW customer" name="/service/customer/findByPkOrCreate should return NEW customer" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-06T09:22:00" time="0.088" tests="4">
+    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.002">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-06T06:49:49" time="0.126" tests="2">
-    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.006">
-    </testcase>
-    <testcase classname="/service/inventory/deposit should deposited inventory with NEW customer correctly" name="/service/inventory/deposit should deposited inventory with NEW customer correctly" time="0.002">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/customer/findByIdOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-06T06:49:49" time="0.09" tests="2">
-    <testcase classname="/service/customer/findByIdOrCreate should return EXIST customer" name="/service/customer/findByIdOrCreate should return EXIST customer" time="0.002">
-    </testcase>
-    <testcase classname="/service/customer/findByIdOrCreate should return NEW customer" name="/service/customer/findByIdOrCreate should return NEW customer" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>
