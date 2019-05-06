@@ -1,21 +1,19 @@
-import { map, compose } from 'lodash/fp';
+import { map } from 'lodash/fp';
 import model from '../model';
 import { INVENTORY_AUDIT } from '../constants';
 
-const payloadMapper = (inventories, action) => map(
-  inventory => ({
-    inventoryId: inventory.id,
-    action: action,
-    status: inventory.status,
-  })
-)(inventories);
-
 const logAdded = async (inventories, modelOptions) => {
 
-  const inventoryAudit = Promise.all(compose(
-    map(inventory => model.inventoryAudit.create(inventory, modelOptions)),
-    () => payloadMapper(inventories, INVENTORY_AUDIT.ACTION.ADDED),
-  )(inventories));
+  const inventoryAudit = Promise.all(
+    map(async inventory => {
+      const payload = {
+        inventoryId: inventory.id,
+        action: INVENTORY_AUDIT.ACTION.ADDED,
+        status: inventory.status,
+      };
+      return model.inventoryAudit.create(payload, modelOptions);
+    })(inventories)
+  );
 
   return inventoryAudit;
 };

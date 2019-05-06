@@ -1,6 +1,7 @@
 import serviceInventory from '../../src/service/inventory';
 import service from '../../src/service';
 import model from '../../src/model';
+import { INVENTORY_AUDIT } from '../../src/constants';
 
 jest.mock('../../src/model', () => ({
   depositReceipt: {
@@ -10,10 +11,13 @@ jest.mock('../../src/model', () => ({
 
 jest.mock('../../src/service', () => ({
   customer: {
-    findByIdOrCreate: jest.fn(),
+    findByPkOrCreate: jest.fn(),
   },
   depositReceipt: {
     generateDepositReceiptNumber: jest.fn(),
+  },
+  inventoryAudit: {
+    logAdded: jest.fn(),
   },
 }));
 
@@ -39,12 +43,16 @@ describe('/service/inventory/deposit', () => {
         height: 5,
         length: 10,
         inventoryTypeId: '1',
+        depositedAt: '2019-05-06T09:30:00',
+        status: INVENTORY_AUDIT.STATUS.DEPOSITED,
       },
       {
         width: 3,
         height: 3,
         length: 5,
         inventoryTypeId: '1',
+        depositedAt: '2019-05-06T09:30:00',
+        status: INVENTORY_AUDIT.STATUS.DEPOSITED,
       },
     ];
 
@@ -72,7 +80,7 @@ describe('/service/inventory/deposit', () => {
       inventories: mockInventory,
     };
 
-    service.customer.findByIdOrCreate = jest.fn(({ id }) => {
+    service.customer.findByPkOrCreate = jest.fn(({ id }) => {
       if (id) {
         return mockCustomer;
       }
@@ -80,19 +88,20 @@ describe('/service/inventory/deposit', () => {
     });
     service.depositReceipt.generateDepositReceiptNumber = jest.fn(() => mockDepositReciptNumber);
     model.depositReceipt.create = jest.fn(() => mockDepositReceiptResponse);
+    service.inventoryAudit.logAdded = jest.fn(() => true);
 
     const result = await serviceInventory.deposit(mockPayloadRequest, mockModelOptions);
 
-    expect(service.customer.findByIdOrCreate).toHaveBeenCalledWith(
+    expect(service.customer.findByPkOrCreate).toHaveBeenCalledWith(
       expect.objectContaining(mockCustomer),
       expect.objectContaining(mockModelOptions),
     );
 
-    expect(service.customer.findByIdOrCreate).toHaveReturnedWith(
+    expect(service.customer.findByPkOrCreate).toHaveReturnedWith(
       expect.objectContaining(mockCustomer),
     );
 
-    expect(service.customer.findByIdOrCreate).toHaveBeenCalledTimes(1);
+    expect(service.customer.findByPkOrCreate).toHaveBeenCalledTimes(1);
 
     expect(service.depositReceipt.generateDepositReceiptNumber).toHaveBeenCalledWith();
     expect(service.depositReceipt.generateDepositReceiptNumber).toHaveReturnedWith(mockDepositReciptNumber);
@@ -114,6 +123,12 @@ describe('/service/inventory/deposit', () => {
     );
     expect(model.depositReceipt.create).toHaveBeenCalledTimes(1);
 
+    expect(service.inventoryAudit.logAdded).toHaveBeenCalledWith(
+      expect.arrayContaining(mockDepositReceiptResponse.inventories),
+      mockModelOptions
+    );
+    expect(service.inventoryAudit.logAdded).toHaveBeenCalledTimes(1);
+
     expect(result).toEqual(mockDepositReceiptResponse);
   });
 
@@ -131,7 +146,9 @@ describe('/service/inventory/deposit', () => {
       {
         weight: 4,
         inventoryTypeId: '1',
-      }
+        depositedAt: '2019-05-06T09:30:00',
+        status: INVENTORY_AUDIT.STATUS.DEPOSITED,
+      },
     ];
 
     const mockPayloadRequest = {
@@ -163,7 +180,7 @@ describe('/service/inventory/deposit', () => {
       inventories: mockInventory,
     };
 
-    service.customer.findByIdOrCreate = jest.fn(({ id }) => {
+    service.customer.findByPkOrCreate = jest.fn(({ id }) => {
       if (id) {
         return null;
       }
@@ -171,19 +188,20 @@ describe('/service/inventory/deposit', () => {
     });
     service.depositReceipt.generateDepositReceiptNumber = jest.fn(() => mockDepositReciptNumber);
     model.depositReceipt.create = jest.fn(() => mockDepositReceiptResponse);
+    service.inventoryAudit.logAdded = jest.fn(() => true);
 
     const result = await serviceInventory.deposit(mockPayloadRequest, mockModelOptions);
 
-    expect(service.customer.findByIdOrCreate).toHaveBeenCalledWith(
+    expect(service.customer.findByPkOrCreate).toHaveBeenCalledWith(
       expect.objectContaining(mockCustomer),
       expect.objectContaining(mockModelOptions),
     );
 
-    expect(service.customer.findByIdOrCreate).toHaveReturnedWith(
+    expect(service.customer.findByPkOrCreate).toHaveReturnedWith(
       expect.objectContaining(mockCustomer),
     );
 
-    expect(service.customer.findByIdOrCreate).toHaveBeenCalledTimes(1);
+    expect(service.customer.findByPkOrCreate).toHaveBeenCalledTimes(1);
 
     expect(service.depositReceipt.generateDepositReceiptNumber).toHaveBeenCalledWith();
     expect(service.depositReceipt.generateDepositReceiptNumber).toHaveReturnedWith(mockDepositReciptNumber);
@@ -204,6 +222,12 @@ describe('/service/inventory/deposit', () => {
       expect.objectContaining(mockDepositReceiptResponse),
     );
     expect(model.depositReceipt.create).toHaveBeenCalledTimes(1);
+
+    expect(service.inventoryAudit.logAdded).toHaveBeenCalledWith(
+      expect.arrayContaining(mockDepositReceiptResponse.inventories),
+      mockModelOptions
+    );
+    expect(service.inventoryAudit.logAdded).toHaveBeenCalledTimes(1);
 
     expect(result).toEqual(mockDepositReceiptResponse);
   });
