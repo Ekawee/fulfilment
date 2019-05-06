@@ -32,6 +32,7 @@ const inventoryTypePrice = (queryInterface, Sequelize, transaction) =>
       expiryDate: { type: Sequelize.DATE },
       price: { type: Sequelize.DECIMAL(10, 2) },
       unitMeasure: { type: Sequelize.STRING },
+      unitMeasureType: { type: Sequelize.STRING },
       amountPerUnitMeasure: { type: Sequelize.DECIMAL(10, 2) },
       multiplyPricePerDay: { type: Sequelize.DECIMAL(10, 2) },
     }, Sequelize),

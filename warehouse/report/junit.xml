@@ -1,38 +1,62 @@
-<testsuites name="jest tests" tests="13" failures="0" time="3.51">
-  <testsuite name="/service/inventoryAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-06T10:20:08" time="0.599" tests="2">
-    <testcase classname="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" name="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" time="0.01">
+<testsuites name="jest tests" tests="23" failures="0" time="3.762">
+  <testsuite name="/service/customerAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:34" time="0.747" tests="2">
+    <testcase classname="/service/customerAudit/logAdded should return inserted data with currentInformation" name="/service/customerAudit/logAdded should return inserted data with currentInformation" time="0.015">
     </testcase>
-    <testcase classname="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" name="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" time="0.005">
+    <testcase classname="/service/customerAudit/logAdded should throw error when there is no customer id" name="/service/customerAudit/logAdded should throw error when there is no customer id" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-06T10:20:08" time="0.131" tests="4">
-    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.003">
+  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:35" time="0.153" tests="2">
+    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.006">
+    </testcase>
+    <testcase classname="/service/inventory/deposit should deposited inventory with NEW customer correctly" name="/service/inventory/deposit should deposited inventory with NEW customer correctly" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/pricing/calculateInventoryDeposited" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:34" time="0.998" tests="4">
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" name="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" time="0.033">
+    </testcase>
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" time="0.002">
+    </testcase>
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" time="0.001">
+    </testcase>
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" name="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/customer/findByPkOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:35" time="0.14" tests="3">
+    <testcase classname="/service/customer/findByPkOrCreate should return EXIST customer" name="/service/customer/findByPkOrCreate should return EXIST customer" time="0.003">
+    </testcase>
+    <testcase classname="/service/customer/findByPkOrCreate should return NEW customer" name="/service/customer/findByPkOrCreate should return NEW customer" time="0.001">
+    </testcase>
+    <testcase classname="/service/customer/create should return NEW customer" name="/service/customer/create should return NEW customer" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="/util/datetime/toStartOfUnit" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:34" time="1.154" tests="6">
+    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.04">
+    </testcase>
+    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.003">
+    </testcase>
+    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.003">
+    </testcase>
+    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.001">
+    </testcase>
+    <testcase classname="/util/datetime/diffDateInUnit should return day preiod that does not care about time" name="/util/datetime/diffDateInUnit should return day preiod that does not care about time" time="0.003">
+    </testcase>
+    <testcase classname="/util/datetime/diffDateInUnit should return month preiod that does not care about time" name="/util/datetime/diffDateInUnit should return month preiod that does not care about time" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/inventoryAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:35" time="0.163" tests="2">
+    <testcase classname="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" name="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" time="0.005">
+    </testcase>
+    <testcase classname="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" name="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-06T22:33:36" time="0.158" tests="4">
+    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" time="0">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/customerAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-06T10:20:08" time="0.817" tests="2">
-    <testcase classname="/service/customerAudit/logAdded should return inserted data with currentInformation" name="/service/customerAudit/logAdded should return inserted data with currentInformation" time="0.01">
-    </testcase>
-    <testcase classname="/service/customerAudit/logAdded should throw error when there is no customer id" name="/service/customerAudit/logAdded should throw error when there is no customer id" time="0.021">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-06T10:20:08" time="0.171" tests="2">
-    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.014">
-    </testcase>
-    <testcase classname="/service/inventory/deposit should deposited inventory with NEW customer correctly" name="/service/inventory/deposit should deposited inventory with NEW customer correctly" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/customer/findByPkOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-06T10:20:08" time="1.135" tests="3">
-    <testcase classname="/service/customer/findByPkOrCreate should return EXIST customer" name="/service/customer/findByPkOrCreate should return EXIST customer" time="0.007">
-    </testcase>
-    <testcase classname="/service/customer/findByPkOrCreate should return NEW customer" name="/service/customer/findByPkOrCreate should return NEW customer" time="0.001">
-    </testcase>
-    <testcase classname="/service/customer/create should return NEW customer" name="/service/customer/create should return NEW customer" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>

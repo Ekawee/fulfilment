@@ -25,3 +25,9 @@ export const INVENTORY_AUDIT = {
     PAID: 'PAID',
   },
 };
+
+export const UNIT_MEASURE_TYPE = {
+  DIMENSION: 'DIMENSION',
+  CHARTER: 'CHARTER',
+  WEIGHT: 'WEIGHT',
+};
