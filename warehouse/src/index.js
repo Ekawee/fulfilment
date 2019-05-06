@@ -4,7 +4,7 @@ import compression from 'compression';
 import contextService from 'request-context';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-// import controller from './controller';
+import controller from './controller';
 import config from './config';
 import winston from './winston';
 import machineAuthenticate from './middleware/machine-authenticate';
@@ -29,7 +29,6 @@ app.use(bodyParser(config));
 app.use(winston.loggerExpress);
 
 if (config.enableSwagger) {
-  // https://github.com/Surnet/swagger-jsdoc/blob/master/docs/GETTING-STARTED.md
   const swaggerJSDocOptions = {
     swaggerDefinition: {
       info: {
@@ -44,7 +43,7 @@ if (config.enableSwagger) {
   app.use(`/api/${version}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }
 
-// app.use(`/api/${version}`, controller);
+app.use(`/api/${version}`, controller);
 app.use(errorHandler);
 
 app.server.listen(config.port, () => {

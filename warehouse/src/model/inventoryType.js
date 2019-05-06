@@ -7,8 +7,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const inventoryType = sequelize.define(
-    'inventoryType',
-    attributes,
+    'inventory_type',
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

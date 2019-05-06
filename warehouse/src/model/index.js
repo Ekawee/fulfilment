@@ -22,7 +22,7 @@ const sequelize = new Sequelize(
     host: config.dbHost,
     dialect: 'postgres',
     operatorAliases: false,
-    logging: config.isEnableDBlogging,
+    logging: (config.isEnableDBlogging === 'true'),
     pool: {
       max: 5,
       min: 0,

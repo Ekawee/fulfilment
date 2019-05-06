@@ -7,3 +7,8 @@ export const ERRORS = {
   NOT_FOUND: 'Not found request',
   INVALID_TOKEN: 'Unauthorized request',
 };
+
+export const DEPOSITE_RECEIPT_NUMBER = {
+  CHARACTER: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+  LENGTH: 10,
+};

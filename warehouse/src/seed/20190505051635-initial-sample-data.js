@@ -1,6 +1,20 @@
 import { DateTime } from 'luxon';
 import sequelizeUtil from '../util/sequelize';
 
+const tableName = {
+  inventoryType: 'inventory_type',
+  inventoryTypePrice: 'inventory_type_price',
+  customer: 'customer',
+  depositReceipt: 'deposit_receipt',
+  shipment: 'shipment',
+  dispatchReceipt: 'dispatch_receipt',
+  inventory: 'inventory',
+  user: 'user',
+  inventoryAudit: 'inventory_audit',
+  customerAudit: 'customer_audit',
+  payment: 'payment',
+};
+
 const inventoryType = [
   sequelizeUtil.withInsertTimeStamp({
     id: 1,
@@ -133,7 +147,7 @@ const inventory = [
     dispatchReceiptId: 1,
     width: 5,
     height: 3,
-    length: 10,
+    length: '10',
     weight: null,
     depositedAt: DateTime.fromISO('2019-05-02T14:30:20').toSQL(),
     dispatchedAt: DateTime.fromISO('2019-05-04T20:13:05').toSQL(),
@@ -148,7 +162,7 @@ const inventory = [
     dispatchReceiptId: 1,
     width: 5,
     height: 3,
-    length: 10,
+    length: '10',
     weight: null,
     depositedAt: DateTime.fromISO('2019-05-02T14:30:20').toSQL(),
     dispatchedAt: DateTime.fromISO('2019-05-04T20:13:05').toSQL(),
@@ -163,7 +177,7 @@ const inventory = [
     dispatchReceiptId: null,
     width: 3,
     height: 3,
-    length: 5,
+    length: '5',
     weight: null,
     depositedAt: DateTime.fromISO('2019-05-02T20:21:01').toSQL(),
     dispatchedAt: null,
@@ -208,7 +222,7 @@ const inventory = [
     dispatchReceiptId: null,
     width: 2,
     height: 2,
-    length: 2,
+    length: '2',
     weight: null,
     depositedAt: DateTime.fromISO('2019-05-03T08:03:00').toSQL(),
     dispatchedAt: null,
@@ -375,17 +389,17 @@ export default {
   up: (queryInterface) => {
     return queryInterface.sequelize.transaction((transaction) => {
       return Promise.all([
-        queryInterface.bulkInsert('inventoryType', inventoryType, { transaction }),
-        queryInterface.bulkInsert('inventoryTypePrice', inventoryTypePrice, { transaction }),
-        queryInterface.bulkInsert('customer', customer, { transaction }),
-        queryInterface.bulkInsert('depositReceipt', depositReceipt, { transaction }),
-        queryInterface.bulkInsert('shipment', shipment, { transaction }),
-        queryInterface.bulkInsert('dispatchReceipt', dispatchReceipt, { transaction }),
-        queryInterface.bulkInsert('inventory', inventory, { transaction }),
-        queryInterface.bulkInsert('user', user, { transaction }),
-        queryInterface.bulkInsert('inventoryAudit', inventoryAudit, { transaction }),
-        queryInterface.bulkInsert('customerAudit', customerAudit, { transaction }),
-        queryInterface.bulkInsert('payment', payment, { transaction }),
+        queryInterface.bulkInsert(tableName.inventoryType, inventoryType, { transaction }),
+        queryInterface.bulkInsert(tableName.inventoryTypePrice, inventoryTypePrice, { transaction }),
+        queryInterface.bulkInsert(tableName.customer, customer, { transaction }),
+        queryInterface.bulkInsert(tableName.depositReceipt, depositReceipt, { transaction }),
+        queryInterface.bulkInsert(tableName.shipment, shipment, { transaction }),
+        queryInterface.bulkInsert(tableName.dispatchReceipt, dispatchReceipt, { transaction }),
+        queryInterface.bulkInsert(tableName.inventory, inventory, { transaction }),
+        queryInterface.bulkInsert(tableName.user, user, { transaction }),
+        queryInterface.bulkInsert(tableName.inventoryAudit, inventoryAudit, { transaction }),
+        queryInterface.bulkInsert(tableName.customerAudit, customerAudit, { transaction }),
+        queryInterface.bulkInsert(tableName.payment, payment, { transaction }),
       ]);
     });
   },
@@ -393,17 +407,17 @@ export default {
   down: (queryInterface) => {
     return queryInterface.sequelize.transaction((transaction) => {
       return Promise.all([
-        queryInterface.bulkDelete('payment', { id: [1] }, { transaction }),
-        queryInterface.bulkDelete('customerAudit', { id: [1, 2, 3] }, { transaction }),
-        queryInterface.bulkDelete('inventoryAudit', { id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }, { transaction }),
-        queryInterface.bulkDelete('user', { id: [1] }, { transaction }),
-        queryInterface.bulkDelete('inventory', { id: [1, 2, 3, 4, 5, 6] }, { transaction }),
-        queryInterface.bulkDelete('dispatchReceipt', { id: [1] }, { transaction }),
-        queryInterface.bulkDelete('shipment', { id: [1] }, { transaction }),
-        queryInterface.bulkDelete('depositReceipt', { id: [1, 2, 3] }, { transaction }),
-        queryInterface.bulkDelete('customer', { id: [1, 2] }, { transaction }),
-        queryInterface.bulkDelete('inventoryTypePrice', { id: [1, 2, 3, 4] }, { transaction }),
-        queryInterface.bulkDelete('inventoryType', { id: [1, 2, 3, 4] }, { transaction }),
+        queryInterface.bulkDelete(tableName.payment, { id: [1] }, { transaction }),
+        queryInterface.bulkDelete(tableName.customerAudit, { id: [1, 2, 3] }, { transaction }),
+        queryInterface.bulkDelete(tableName.inventoryAudit, { id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }, { transaction }),
+        queryInterface.bulkDelete(tableName.user, { id: [1] }, { transaction }),
+        queryInterface.bulkDelete(tableName.inventory, { id: [1, 2, 3, 4, 5, 6] }, { transaction }),
+        queryInterface.bulkDelete(tableName.dispatchReceipt, { id: [1] }, { transaction }),
+        queryInterface.bulkDelete(tableName.shipment, { id: [1] }, { transaction }),
+        queryInterface.bulkDelete(tableName.depositReceipt, { id: [1, 2, 3] }, { transaction }),
+        queryInterface.bulkDelete(tableName.customer, { id: [1, 2] }, { transaction }),
+        queryInterface.bulkDelete(tableName.inventoryTypePrice, { id: [1, 2, 3, 4] }, { transaction }),
+        queryInterface.bulkDelete(tableName.inventoryType, { id: [1, 2, 3, 4] }, { transaction }),
       ]);
     });
   },

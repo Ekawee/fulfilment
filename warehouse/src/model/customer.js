@@ -13,7 +13,7 @@ export default (sequelize, Sequelize) => {
 
   const customer = sequelize.define(
     'customer',
-    attributes,
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

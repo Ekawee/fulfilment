@@ -13,8 +13,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const dispatchReceipt = sequelize.define(
-    'dispatchReceipt',
-    attributes,
+    'dispatch_receipt',
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }
