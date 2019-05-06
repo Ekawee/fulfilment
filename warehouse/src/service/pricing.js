@@ -9,7 +9,7 @@ import { UNIT_MEASURE_TYPE } from '../constants';
  * Calculate deposit inventory cost.
  * @param1 inventory id
  * @param2 sequelize model options
- * @return deposit price to calculate and deposit preriods.
+ * @return deposit price to calculate and deposit day preriods.
  */
 const calculateInventoryDeposited = async (inventoryId, modelOptions) => {
   const { transaction } = modelOptions;

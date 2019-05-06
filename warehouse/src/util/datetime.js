@@ -12,7 +12,7 @@ DateTime.fromISO(date) : DateTime.fromJSDate(date)).endOf(unit);
  */
 const diffDateInUnit = (end, start, unit) => {
   const endDate = toStartOfUnit(end, unit);
-  const startDate = toEndOfUnit(start, unit);
+  const startDate = toStartOfUnit(start, unit);
 
   return getOr(0, unit, endDate.diff(startDate, unit).toObject());
 };
