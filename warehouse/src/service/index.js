@@ -3,6 +3,7 @@ import inventoryAudit from './inventoryAudit';
 import customer from './customer';
 import depositReceipt from './depositReceipt';
 import customerAudit from './customerAudit';
+import pricing from './pricing';
 
 export default {
   inventory,
@@ -10,4 +11,5 @@ export default {
   depositReceipt,
   inventoryAudit,
   customerAudit,
+  pricing,
 };
