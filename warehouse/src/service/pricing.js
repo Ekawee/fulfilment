@@ -71,6 +71,7 @@ const calculateInventoryDeposited = async (inventoryId, modelOptions) => {
   };
 
   return {
+    id: inventoryId,
     dayCount,
     price: calculateByUnitMeasureType[unitMeasureType || 'default'](),
   };

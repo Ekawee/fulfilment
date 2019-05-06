@@ -36,6 +36,18 @@ const createInventorySchema = {
   inventories: isArray.min(1).items(inventorySchema),
 };
 
+const createShipmentSchema = {
+  name: isString.required(),
+  address: isString.required(),
+  mobileNumber: isString.required(),
+  email: isString.required(),
+};
+
+const inventoryDispatchSchema = {
+  inventories: isArray.min(1).items({ id: isString.required() }),
+  shipment: isObject.keys(createShipmentSchema),
+};
+
 /**
  * @swagger
  * /inventory/deposit:
@@ -46,7 +58,7 @@ const createInventorySchema = {
  *      - application/json
  *    parameters:
  *       - name: obj
- *         description: create insured person
+ *         description: inventory items to want to deposit
  *         in: body
  *         schema:
  *           $ref: '#/definitions/requestDepositInventory'
@@ -77,6 +89,49 @@ router.post(
     }
   }),
 );
+
+/**
+ * @swagger
+ * /inventory/dispatch/price:
+ *  post:
+ *    description: for calculate summary price before dispatching
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *       - name: obj
+ *         description: inventory item to want to dispatch
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/requestDispatchInventory'
+ *    responses:
+ *       200:
+ *         description: return deposited and shipment price
+ *         schema:
+ *           $ref: '#/definitions/responseDispatchInventoryPrice'
+*/
+router.post(
+  '/inventory/dispatch/price',
+  validate({
+    body: isObject.keys(inventoryDispatchSchema),
+  }),
+  machineAuthenticate,
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        const body = pick(keys(inventoryDispatchSchema), req.body);
+        res.send(await service.inventory.dispatchPrice(body, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while summary dispatch deposited inventory price.', { error: toString(err), body: JSON.stringify(req.body) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
+
 
 export default router;
 
@@ -127,4 +182,43 @@ export default router;
  *      properties:
  *        depositReceiptNumber:
  *          type: string
+ *   requestDispatchInventory:
+ *     type: object
+ *     properties:
+ *       inventories:
+ *          type: array
+ *          items:
+ *           required:
+ *             - id
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: string
+ *       shipment:
+ *          type: object
+ *          properties:
+ *           name:
+ *             type: string
+ *           address:
+ *             type: string
+ *           mobileNumber:
+ *             type: string
+ *           email:
+ *             type: string
+ *   responseDispatchInventoryPrice:
+ *      type: object
+ *      properties:
+ *       inventoriesDepositedPrice:
+ *          type: array
+ *          items:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: string
+ *             dayCount:
+ *               type: string
+ *             price:
+ *               type: number
+ *       shipmentPrice:
+ *          type: number
  */
