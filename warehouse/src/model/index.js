@@ -9,7 +9,7 @@ import dispatchReceipt from './dispatchReceipt';
 import inventory from './inventory';
 import user from './user';
 import inventoryAudit from './inventoryAudit';
-import customerAudit from './shipment';
+import customerAudit from './customerAudit';
 import payment from './payment';
 
 Sequelize.postgres.DECIMAL.parse = (value) => parseFloat(value);
