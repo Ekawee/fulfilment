@@ -1,13 +1,13 @@
-import shortid from 'shortid';
+import generate from 'nanoid/generate';
 import { compose, upperCase } from 'lodash/fp';
+import { DEPOSITE_RECEIPT_NUMBER } from '../constants';
 
-
-const generateDepositReciptNumber = compose(
+const generateDepositReceiptNumber = compose(
   (str) => str.replace(/ /g, ''),
   upperCase,
-  shortid.generate,
+  () => generate(DEPOSITE_RECEIPT_NUMBER.CHARACTER, DEPOSITE_RECEIPT_NUMBER.LENGTH),
 );
 
 export default {
-  generateDepositReciptNumber,
+  generateDepositReceiptNumber,
 };

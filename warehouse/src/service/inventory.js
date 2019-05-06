@@ -11,7 +11,7 @@ const deposit = async (data, modelOptions) => {
 
   const payloadCreateInventory = {
     customerId: getOr(null, 'id')(customerModel),
-    depositReceiptNumber: service.depositReceipt.generateDepositReciptNumber(),
+    depositReceiptNumber: service.depositReceipt.generateDepositReceiptNumber(),
     inventories,
   };
 
