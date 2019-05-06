@@ -62,7 +62,7 @@ const dispatchPrice = async (data, modelOptions) => {
   /*
    * service.pricing.calculateShipment is mocking up to fix price for now
    */
-  const shipmentPrice = await service.pricing.calculateShipment(shipment);
+  const shipmentPrice = await service.pricing.calculateShipment(shipment, modelOptions);
 
   return {
     inventoriesDepositedPrice,

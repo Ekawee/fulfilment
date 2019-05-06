@@ -55,6 +55,7 @@ describe('/service/pricing/calculateInventoryDeposited', () => {
      *  - Total: 31 Bath
      */
     const expecetedResult = {
+      id: mockInventoryId,
       dayCount: 5,
       price: 31,
     };
@@ -138,6 +139,7 @@ describe('/service/pricing/calculateInventoryDeposited', () => {
      *  - Total: 240 Bath
      */
     const expecetedResult = {
+      id: mockInventoryId,
       dayCount: 4,
       price: 240,
     };
@@ -220,6 +222,7 @@ describe('/service/pricing/calculateInventoryDeposited', () => {
      *  - Total: 150 Bath
      */
     const expecetedResult = {
+      id: mockInventoryId,
       dayCount: 3,
       price: 150,
     };
@@ -305,6 +308,7 @@ describe('/service/pricing/calculateInventoryDeposited', () => {
      *  - Total: 480 Bath
      */
     const expecetedResult = {
+      id: mockInventoryId,
       dayCount: 6,
       price: 480,
     };
