@@ -8,8 +8,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const depositReceipt = sequelize.define(
-    'depositReceipt',
-    attributes,
+    'deposit_receipt',
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

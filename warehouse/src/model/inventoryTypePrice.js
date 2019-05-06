@@ -13,8 +13,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const inventoryTypePrice = sequelize.define(
-    'inventoryTypePrice',
-    attributes,
+    'inventory_type_price',
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

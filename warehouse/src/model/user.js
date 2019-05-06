@@ -11,7 +11,7 @@ export default (sequelize, Sequelize) => {
 
   const user = sequelize.define(
     'user',
-    attributes,
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

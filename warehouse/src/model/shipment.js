@@ -11,7 +11,7 @@ export default (sequelize, Sequelize) => {
 
   const shipment = sequelize.define(
     'shipment',
-    attributes,
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

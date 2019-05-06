@@ -10,7 +10,7 @@ export default (sequelize, Sequelize) => {
 
   const payment = sequelize.define(
     'payment',
-    attributes,
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

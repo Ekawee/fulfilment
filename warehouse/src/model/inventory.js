@@ -19,7 +19,7 @@ export default (sequelize, Sequelize) => {
 
   const inventory = sequelize.define(
     'inventory',
-    attributes,
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

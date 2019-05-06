@@ -1,16 +1,16 @@
 import sequelizeUtil from '../util/sequelize';
 
 const tableName = {
-  inventoryType: 'inventoryType',
-  inventoryTypePrice: 'inventoryTypePrice',
+  inventoryType: 'inventory_type',
+  inventoryTypePrice: 'inventory_type_price',
   customer: 'customer',
-  depositReceipt: 'depositReceipt',
+  depositReceipt: 'deposit_receipt',
   shipment: 'shipment',
-  dispatchReceipt: 'dispatchReceipt',
+  dispatchReceipt: 'dispatch_receipt',
   inventory: 'inventory',
   user: 'user',
-  inventoryAudit: 'inventoryAudit',
-  customerAudit: 'customerAudit',
+  inventoryAudit: 'inventory_audit',
+  customerAudit: 'customer_audit',
   payment: 'payment',
 };
 

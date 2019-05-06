@@ -11,8 +11,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const inventoryAudit = sequelize.define(
-    'inventoryAudit',
-    attributes,
+    'inventory_audit',
+    sequelizeUtil.appendKeyField(attributes),
     {
       paranoid: true,
     }

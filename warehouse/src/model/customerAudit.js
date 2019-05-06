@@ -11,8 +11,8 @@ export default (sequelize, Sequelize) => {
   }, Sequelize);
 
   const customerAudit = sequelize.define(
-    'customerAudit',
-    attributes,
+    'customer_audit',
+    sequelizeUtil.camelToSnakeCase(attributes),
     {
       paranoid: true,
     }
