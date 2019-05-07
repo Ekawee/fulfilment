@@ -104,7 +104,6 @@
       "cobertura"
     ],
     "collectCoverageFrom": [
-      "src/controller/*.(js)",
       "src/service/*.(js)",
       "src/util/*.(js)"
     ],
