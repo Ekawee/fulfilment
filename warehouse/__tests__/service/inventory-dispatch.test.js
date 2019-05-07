@@ -23,7 +23,7 @@ jest.mock('../../src/service', () => ({
     dispatchPrice: jest.fn(),
   },
   dispatchReceipt: {
-    generateDepositReceiptNumber: jest.fn(),
+    generateDispatchReceiptNumber: jest.fn(),
   },
   inventoryAudit: {
     logUpdated: jest.fn(),
@@ -202,7 +202,7 @@ describe('/service/inventory/dispatch', () => {
 
     DateTime.utc = jest.fn(() => mockToday);
     service.inventory.dispatchPrice = jest.fn(() => mockPricing);
-    service.dispatchReceipt.generateDepositReceiptNumber = jest.fn(() => mockDispathReceiptNumber);
+    service.dispatchReceipt.generateDispatchReceiptNumber = jest.fn(() => mockDispathReceiptNumber);
     model.dispatchReceipt.create = jest.fn(() => mockDispatchReceiptResponse);
     model.inventory.update = jest.fn((_, { where: { id } }) => [null, find({ id })(mockInventoriesUpdatedResponse)]);
     service.inventoryAudit.logUpdated = jest.fn(() => true);
@@ -218,11 +218,11 @@ describe('/service/inventory/dispatch', () => {
 
     expect(service.inventory.dispatchPrice).toHaveBeenCalledTimes(1);
 
-    expect(service.dispatchReceipt.generateDepositReceiptNumber).toHaveBeenCalledWith();
+    expect(service.dispatchReceipt.generateDispatchReceiptNumber).toHaveBeenCalledWith();
 
-    expect(service.dispatchReceipt.generateDepositReceiptNumber).toHaveReturnedWith(mockDispathReceiptNumber);
+    expect(service.dispatchReceipt.generateDispatchReceiptNumber).toHaveReturnedWith(mockDispathReceiptNumber);
 
-    expect(service.dispatchReceipt.generateDepositReceiptNumber).toHaveBeenCalledTimes(1);
+    expect(service.dispatchReceipt.generateDispatchReceiptNumber).toHaveBeenCalledTimes(1);
 
     expect(model.dispatchReceipt.create).toHaveBeenCalledWith(
       expect.objectContaining(mockDispatchReceiptPayload),
