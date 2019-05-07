@@ -15,6 +15,19 @@ const router = express.Router();
  *    tags: [DepositReceipt]
  *    produces:
  *      - application/json
+ *    parameters:
+ *      - name: depositeReceiptNumber
+ *        in: path
+ *        description: deposite receipt number
+ *        type: string
+ *      - name: limit
+ *        in: path
+ *        description: limit records
+ *        type: number
+ *      - name: offset
+ *        in: path
+ *        description: offset records
+ *        type: number
  *    responses:
  *      200:
  *        schema:
