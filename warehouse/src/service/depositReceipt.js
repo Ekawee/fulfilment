@@ -1,9 +1,13 @@
 import generate from 'nanoid/generate';
 import model from '../model';
-import { compose, upperCase, split } from 'lodash/fp';
+import { compose, upperCase } from 'lodash/fp';
 import sequelizeUtil from '../util/sequelize';
 import { DEPOSITE_RECEIPT_NUMBER } from '../constants';
 
+/*
+ * generate random keys to combine with A-Z and 0-9
+ * @return string.
+ */
 const generateDepositReceiptNumber = compose(
   (str) => str.replace(/ /g, ''),
   upperCase,
