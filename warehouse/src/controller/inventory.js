@@ -225,7 +225,7 @@ router.put(
  * @swagger
  * /deposit-receipt/{id}/inventories:
  *  get:
- *    description: get inventory detail
+ *    description: get inventory detail by deposit receipt id
  *    tags: [Inventory]
  *    produces:
  *      - application/json
@@ -266,7 +266,7 @@ router.get(
  * @swagger
  * /dispatch-receipt/{id}/inventories:
  *  get:
- *    description: get inventory detail
+ *    description: get inventory detail by dispatch receipt id
  *    tags: [Inventory]
  *    produces:
  *      - application/json
@@ -295,6 +295,47 @@ router.get(
       });
     } catch (err) {
       winston.logger.error('Error while get inventories detail.', { error: JSON.stringify(req.params) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
+
+/**
+ * @swagger
+ * /inventory/{id}:
+ *  get:
+ *    description: get inventory detail
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: inventory id
+ *        type: string
+ *    responses:
+ *      200:
+ *        schema:
+ *          type: object
+ *          properties:
+ *            $ref: '#/definitions/baseInventory'
+ */
+router.get(
+  '/inventory/:id',
+  machineAuthenticate,
+  validate({
+    id: Joi.string().valid(Joi.ref('$params.id')).required(),
+  }),
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        res.send(await service.inventory.getByPk(req.params.id, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while get inventory detail.', { error: JSON.stringify(req.params) });
       res.status(500).send({
         statusCode: 500,
         description: toString(err),

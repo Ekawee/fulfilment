@@ -178,10 +178,28 @@ const getByDispatchReceiptPk = async (id, modelOptions) => {
   return sequelizeUtil.modelToObject(inventories);
 };
 
+/*
+ * query inventory by id
+ * @param1 string inventory id.
+ * @return object contain inventory detail.
+ */
+const getByPk = async (id, modelOptions) => {
+  const inventory = await model.inventory.findByPk(id, modelOptions);
+
+  const inventoryObjecct = sequelizeUtil.modelToObject(inventory);
+
+  const pricing = await service.pricing.calculateInventoryDeposited(inventoryObjecct.id, modelOptions);
+  return {
+    ...pricing,
+    ...inventoryObjecct,
+  };
+};
+
 export default {
   deposit,
   dispatchPrice,
   dispatch,
   getByDepositeReceiptPk,
   getByDispatchReceiptPk,
+  getByPk,
 };
