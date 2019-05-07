@@ -4,15 +4,11 @@ import service from '.';
 import sequelizeUtil from '../util/sequelize';
 
 /*
- * query summary profit and forcast amount.
- * @param1 object to contain request query fields
+ * query summary profit from inventory status 'DEPOSITED' and 'STORED'
+ * @param1 object sequelize transaction
  * @return object to contain data.
  */
-const profit = async (query, modelOptions) => {
-  const {
-    limit = 10,
-    offset = 0,
-  } = query;
+const depositForcast = async (modelOptions) => {
   const depositQuery = `
     select
       i.id
@@ -20,8 +16,6 @@ const profit = async (query, modelOptions) => {
     join inventory i
     on dr.id = i.deposit_receipt_id
     where status in ('DEPOSITED', 'STORED')
-    ${limit ? `limit ${limit}` : ''}
-    ${offset ? `offset ${offset}` : ''}
   `;
 
   const depositModel = await model.sequelize.query(depositQuery, {
@@ -41,11 +35,18 @@ const profit = async (query, modelOptions) => {
     )(depositTransform)
   );
 
-  const depositInventory = {
+  return {
     amount: size(depositTransform),
     forcastAmount: sum(depositPrice),
   };
+};
 
+/*
+ * query summary profit from inventory status 'DISPATCHED'
+ * @param1 object sequelize transaction
+ * @return object to contain data.
+ */
+const dispatchExpected = async (modelOptions) => {
   const dispatchQuery = `
     select
       sum(deposit_amount) as expected_amount,
@@ -56,8 +57,6 @@ const profit = async (query, modelOptions) => {
     join inventory i
     on dr.id = i.dispatch_receipt_id
     where status = 'DISPATCHED'
-    ${limit ? `limit ${limit}` : ''}
-    ${offset ? `offset ${offset}` : ''}
   `;
 
   const dispatchModel = await model.sequelize.query(dispatchQuery, {
@@ -66,8 +65,15 @@ const profit = async (query, modelOptions) => {
     ...modelOptions,
   });
 
-  const dispatchTransform = sequelizeUtil.transformKeySnakeToCamelCase(dispatchModel);
+  return head(sequelizeUtil.transformKeySnakeToCamelCase(dispatchModel));
+};
 
+/*
+ * query summary profit from inventory status 'PAID'
+ * @param1 object sequelize transaction
+ * @return object to contain data.
+ */
+const paidProfit = async (modelOptions) => {
   const paidQuery = `
     select
       sum(deposit_amount) as profit_amount,
@@ -78,8 +84,6 @@ const profit = async (query, modelOptions) => {
     join inventory i
     on dr.id = i.dispatch_receipt_id
     where status = 'PAID'
-    ${limit ? `limit ${limit}` : ''}
-    ${offset ? `offset ${offset}` : ''}
   `;
 
   const paidModel = await model.sequelize.query(paidQuery, {
@@ -88,14 +92,28 @@ const profit = async (query, modelOptions) => {
     ...modelOptions,
   });
 
-  const paidTransform = sequelizeUtil.transformKeySnakeToCamelCase(paidModel);
+  return head(sequelizeUtil.transformKeySnakeToCamelCase(paidModel));
+};
 
+/*
+ * query summary profit and forcast amount.
+ * @param1 object sequelize transaction
+ * @return object to contain data.
+ */
+const profit = async (modelOptions) => {
+  const depositInventory = await service.report.depositForcast(modelOptions);
+  const dispatchInventory = await service.report.dispatchExpected(modelOptions);
+  const paidInventory = await service.report.paidProfit(modelOptions);
   return {
     depositInventory,
-    dispatchInventory: head(dispatchTransform),
-    paidInventory: head(paidTransform),
+    dispatchInventory,
+    paidInventory,
   };
 };
+
 export default {
   profit,
+  depositForcast,
+  dispatchExpected,
+  paidProfit,
 };

@@ -25,10 +25,10 @@ const router = express.Router();
 router.get(
   '/report/profit',
   machineAuthenticate,
-  asyncWrapper(async (req, res) => {
+  asyncWrapper(async (_, res) => {
     try {
       await model.sequelize.transaction(async (transaction) => {
-        res.send(await service.report.profit(req.query, { transaction }));
+        res.send(await service.report.profit({ transaction }));
       });
     } catch (err) {
       winston.logger.error('Error while get profit reports.');
