@@ -6,6 +6,10 @@ import service from '.';
 import { DISPATCH_RECEIPT_NUMBER, INVENTORY_AUDIT } from '../constants';
 import { BadRequestException } from '../exception';
 
+/*
+ * generate random keys to combine with A-Z and 0-9
+ * @return string.
+ */
 const generateDispatchReceiptNumber = compose(
   (str) => str.replace(/ /g, ''),
   upperCase,
