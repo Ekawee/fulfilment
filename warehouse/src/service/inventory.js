@@ -132,8 +132,25 @@ const dispatch = async (data, modelOptions) => {
   };
 };
 
+/*
+ * query list detail of inventories by using depositeR.
+ * @param1 string deposit receipt id.
+ * @return array contain inventory detail.
+ */
+const getByDepositeReceiptPk = async (id, modelOptions) => {
+  const depositReceipt = await model.inventory.findAll({
+    where: {
+      depositReceiptId: id,
+    },
+    ...modelOptions,
+  });
+
+  return sequelizeUtil.modelToObject(depositReceipt);
+};
+
 export default {
   deposit,
   dispatchPrice,
   dispatch,
+  getByDepositeReceiptPk,
 };

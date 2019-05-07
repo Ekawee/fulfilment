@@ -221,11 +221,63 @@ router.put(
   }),
 );
 
+/**
+ * @swagger
+ * /deposit-receipt/{id}/inventories:
+ *  get:
+ *    description: get inventory detail
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: deposite receipt id
+ *        type: string
+ *    responses:
+ *      200:
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/definitions/baseInventory'
+ */
+router.get(
+  '/deposit-receipt/:id/inventories',
+  machineAuthenticate,
+  validate({
+    id: Joi.string().valid(Joi.ref('$params.id')).required(),
+  }),
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        res.send(await service.inventory.getByDepositeReceiptPk(req.params.id, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while get inventories detail.', { error: JSON.stringify(req.params) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
+
 export default router;
 
 /**
  * @swagger
  * definitions:
+ *   baseTimestamp:
+ *    properties:
+ *      createdAt:
+ *        type: string
+ *        format: date-time
+ *      updatedAt:
+ *        type: string
+ *        format: date-time
+ *      deletedAt:
+ *        type: string
+ *        format: date-times
  *   requestDepositInventory:
  *     type: object
  *     required:
@@ -340,4 +392,31 @@ export default router;
  *          type: number
  *        netAmount:
  *          type: number
+ *   baseInventory:
+ *    properties:
+ *      inventoryTypeId:
+ *        type: string
+ *      depositReceiptId:
+ *        type: string
+ *      dispatchReceiptId:
+ *        type: string
+ *      width:
+ *        type: number
+ *      height:
+ *        type: number
+ *      length:
+ *        type: number
+ *      weight:
+ *        type: number
+ *      depositedAt:
+ *        type: string
+ *      dispatchedAt:
+ *        type: string
+ *      expectedAmount:
+ *        type: number
+ *      paidAmount:
+ *        type: number
+ *      status:
+ *        type: string
+ *      $ref: '#/definitions/baseTimestamp'
  */
