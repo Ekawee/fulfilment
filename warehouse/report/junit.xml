@@ -1,6 +1,6 @@
-<testsuites name="jest tests" tests="41" failures="0" time="3.957">
-  <testsuite name="/util/sequelize/appendKeyField" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:23" time="0.606" tests="6">
-    <testcase classname="/util/sequelize/appendKeyField should return object with append key &quot;field&quot;" name="/util/sequelize/appendKeyField should return object with append key &quot;field&quot;" time="0.008">
+<testsuites name="jest tests" tests="41" failures="0" time="4.318">
+  <testsuite name="/util/sequelize/appendKeyField" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:28" time="0.636" tests="6">
+    <testcase classname="/util/sequelize/appendKeyField should return object with append key &quot;field&quot;" name="/util/sequelize/appendKeyField should return object with append key &quot;field&quot;" time="0.005">
     </testcase>
     <testcase classname="/util/sequelize/transformKeyCamelToSnakeCase should return transform object keys from camel to snake" name="/util/sequelize/transformKeyCamelToSnakeCase should return transform object keys from camel to snake" time="0.001">
     </testcase>
@@ -8,101 +8,101 @@
     </testcase>
     <testcase classname="/util/sequelize/withDefaultTableFields should return object with append key &quot;field&quot; and append fields" name="/util/sequelize/withDefaultTableFields should return object with append key &quot;field&quot; and append fields" time="0.001">
     </testcase>
-    <testcase classname="/util/sequelize/withForeignKey should return object to append references key properties for define FK" name="/util/sequelize/withForeignKey should return object to append references key properties for define FK" time="0.001">
+    <testcase classname="/util/sequelize/withForeignKey should return object to append references key properties for define FK" name="/util/sequelize/withForeignKey should return object to append references key properties for define FK" time="0">
     </testcase>
-    <testcase classname="/util/sequelize/withInsertTimeStamp should return palin object append default time stamp and transform object key name from camel case to snake case" name="/util/sequelize/withInsertTimeStamp should return palin object append default time stamp and transform object key name from camel case to snake case" time="0.008">
+    <testcase classname="/util/sequelize/withInsertTimeStamp should return palin object append default time stamp and transform object key name from camel case to snake case" name="/util/sequelize/withInsertTimeStamp should return palin object append default time stamp and transform object key name from camel case to snake case" time="0.011">
     </testcase>
   </testsuite>
-  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:23" time="1.066" tests="4">
-    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.005">
+  <testsuite name="/service/depositReceipt/generateDepositReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:28" time="1.091" tests="4">
+    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number 10 digits" time="0.008">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number contain only character and number" time="0.001">
     </testcase>
-    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" time="0">
+    <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain any special character" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" name="/service/depositReceipt/generateDepositReceiptNumber should return deposite receipt number NOT contain lower character" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="/service/pricing/calculateInventoryDeposited" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:23" time="0.494" tests="4">
-    <testcase classname="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" name="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" time="0.023">
+  <testsuite name="/service/pricing/calculateInventoryDeposited" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:29" time="0.561" tests="4">
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" name="/service/pricing/calculateInventoryDeposited should return Supplementary Food price for 5 days" time="0.021">
     </testcase>
-    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" time="0.015">
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by weight price for 4 days" time="0.004">
     </testcase>
-    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" time="0.003">
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" name="/service/pricing/calculateInventoryDeposited should return Clothes by charter price for 3 days" time="0.008">
     </testcase>
-    <testcase classname="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" name="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" time="0.009">
+    <testcase classname="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" name="/service/pricing/calculateInventoryDeposited should return Others type price for 6 days" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="/service/depositReceipt/generateDispatchReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.351" tests="6">
-    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number 10 digits" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number 10 digits" time="0.002">
+  <testsuite name="/service/depositReceipt/generateDispatchReceiptNumber" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.41" tests="6">
+    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number 10 digits" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number 10 digits" time="0.001">
     </testcase>
     <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number contain only character and number" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number contain only character and number" time="0.001">
     </testcase>
-    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain any special character" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain any special character" time="0.001">
+    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain any special character" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain any special character" time="0">
     </testcase>
-    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain lower character" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain lower character" time="0">
+    <testcase classname="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain lower character" name="/service/depositReceipt/generateDispatchReceiptNumber should return dispatch receipt number NOT contain lower character" time="0.001">
     </testcase>
-    <testcase classname="/service/depositReceipt/updatePaid should return deposite receipt with payment reference" name="/service/depositReceipt/updatePaid should return deposite receipt with payment reference" time="0.009">
+    <testcase classname="/service/depositReceipt/updatePaid should return deposite receipt with payment reference" name="/service/depositReceipt/updatePaid should return deposite receipt with payment reference" time="0.008">
     </testcase>
     <testcase classname="/service/depositReceipt/updatePaid should throw error when dispatch reciept number does not exist" name="/service/depositReceipt/updatePaid should throw error when dispatch reciept number does not exist" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="/service/customerAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.305" tests="2">
-    <testcase classname="/service/customerAudit/logAdded should return inserted data with currentInformation" name="/service/customerAudit/logAdded should return inserted data with currentInformation" time="0.004">
+  <testsuite name="/service/customerAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.363" tests="2">
+    <testcase classname="/service/customerAudit/logAdded should return inserted data with currentInformation" name="/service/customerAudit/logAdded should return inserted data with currentInformation" time="0.002">
     </testcase>
-    <testcase classname="/service/customerAudit/logAdded should throw error when there is no customer id" name="/service/customerAudit/logAdded should throw error when there is no customer id" time="0.004">
+    <testcase classname="/service/customerAudit/logAdded should throw error when there is no customer id" name="/service/customerAudit/logAdded should throw error when there is no customer id" time="0.006">
     </testcase>
   </testsuite>
-  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.145" tests="2">
-    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.01">
+  <testsuite name="/service/inventory/getByDepositeReceiptPk" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:29" time="1.68" tests="1">
+    <testcase classname="/service/inventory/getByDepositeReceiptPk should return invetories list by using depositReceiptId (found)" name="/service/inventory/getByDepositeReceiptPk should return invetories list by using depositReceiptId (found)" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/customer/findByPkOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.141" tests="3">
+    <testcase classname="/service/customer/findByPkOrCreate should return EXIST customer" name="/service/customer/findByPkOrCreate should return EXIST customer" time="0.004">
+    </testcase>
+    <testcase classname="/service/customer/findByPkOrCreate should return NEW customer" name="/service/customer/findByPkOrCreate should return NEW customer" time="0.006">
+    </testcase>
+    <testcase classname="/service/customer/create should return NEW customer" name="/service/customer/create should return NEW customer" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/inventory/dispatchPrice" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.184" tests="2">
+    <testcase classname="/service/inventory/dispatchPrice should return deposited price for each item and shipment price" name="/service/inventory/dispatchPrice should return deposited price for each item and shipment price" time="0.006">
+    </testcase>
+    <testcase classname="/service/inventory/dispatch should return dispatch receipt number and net amount" name="/service/inventory/dispatch should return dispatch receipt number and net amount" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="/util/datetime/toStartOfUnit" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.152" tests="6">
+    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.006">
+    </testcase>
+    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.002">
+    </testcase>
+    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.004">
+    </testcase>
+    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.002">
+    </testcase>
+    <testcase classname="/util/datetime/diffDateInUnit should return day preiod that does not care about time" name="/util/datetime/diffDateInUnit should return day preiod that does not care about time" time="0.002">
+    </testcase>
+    <testcase classname="/util/datetime/diffDateInUnit should return month preiod that does not care about time" name="/util/datetime/diffDateInUnit should return month preiod that does not care about time" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="/service/inventory/deposit" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.206" tests="2">
+    <testcase classname="/service/inventory/deposit should deposited inventory with EXIST customer correctly" name="/service/inventory/deposit should deposited inventory with EXIST customer correctly" time="0.014">
     </testcase>
     <testcase classname="/service/inventory/deposit should deposited inventory with NEW customer correctly" name="/service/inventory/deposit should deposited inventory with NEW customer correctly" time="0.009">
     </testcase>
   </testsuite>
-  <testsuite name="/service/inventory/dispatchPrice" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.166" tests="2">
-    <testcase classname="/service/inventory/dispatchPrice should return deposited price for each item and shipment price" name="/service/inventory/dispatchPrice should return deposited price for each item and shipment price" time="0.012">
-    </testcase>
-    <testcase classname="/service/inventory/dispatch should return dispatch receipt number and net amount" name="/service/inventory/dispatch should return dispatch receipt number and net amount" time="0.012">
+  <testsuite name="/service/depositReceipt/getDashboard" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.118" tests="1">
+    <testcase classname="/service/depositReceipt/getDashboard should return summary data from deposit receipt" name="/service/depositReceipt/getDashboard should return summary data from deposit receipt" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="/service/inventory/getByDepositeReceiptPk" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:23" time="1.76" tests="1">
-    <testcase classname="/service/inventory/getByDepositeReceiptPk should return invetories list by using depositReceiptId (found)" name="/service/inventory/getByDepositeReceiptPk should return invetories list by using depositReceiptId (found)" time="0.049">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/depositReceipt/getDashboard" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.137" tests="1">
-    <testcase classname="/service/depositReceipt/getDashboard should return summary data from deposit receipt" name="/service/depositReceipt/getDashboard should return summary data from deposit receipt" time="0.006">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/customer/findByPkOrCreate" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:24" time="0.17" tests="3">
-    <testcase classname="/service/customer/findByPkOrCreate should return EXIST customer" name="/service/customer/findByPkOrCreate should return EXIST customer" time="0.003">
-    </testcase>
-    <testcase classname="/service/customer/findByPkOrCreate should return NEW customer" name="/service/customer/findByPkOrCreate should return NEW customer" time="0.002">
-    </testcase>
-    <testcase classname="/service/customer/create should return NEW customer" name="/service/customer/create should return NEW customer" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="/service/inventoryAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:25" time="0.124" tests="4">
+  <testsuite name="/service/inventoryAudit/logAdded" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:18:30" time="0.116" tests="4">
     <testcase classname="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" name="/service/inventoryAudit/logAdded should return insert audit log with action ADDED" time="0.003">
     </testcase>
     <testcase classname="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" name="/service/inventoryAudit/logAdded should do nothing when there is no inventory data" time="0.001">
     </testcase>
-    <testcase classname="/service/inventoryAudit/logUpdated should return insert audit log with action UPDATED, status DISPATCHED" name="/service/inventoryAudit/logUpdated should return insert audit log with action UPDATED, status DISPATCHED" time="0.01">
+    <testcase classname="/service/inventoryAudit/logUpdated should return insert audit log with action UPDATED, status DISPATCHED" name="/service/inventoryAudit/logUpdated should return insert audit log with action UPDATED, status DISPATCHED" time="0.003">
     </testcase>
     <testcase classname="/service/inventoryAudit/logUpdated should do nothing when there is no inventory data" name="/service/inventoryAudit/logUpdated should do nothing when there is no inventory data" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="/util/datetime/toStartOfUnit" errors="0" failures="0" skipped="0" timestamp="2019-05-07T14:02:25" time="0.139" tests="6">
-    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.007">
-    </testcase>
-    <testcase classname="/util/datetime/toStartOfUnit should return date with start day time when input JS format" name="/util/datetime/toStartOfUnit should return date with start day time when input JS format" time="0.001">
-    </testcase>
-    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.002">
-    </testcase>
-    <testcase classname="/util/datetime/toEndOfUnit should return date with end day time when input JS format" name="/util/datetime/toEndOfUnit should return date with end day time when input JS format" time="0.001">
-    </testcase>
-    <testcase classname="/util/datetime/diffDateInUnit should return day preiod that does not care about time" name="/util/datetime/diffDateInUnit should return day preiod that does not care about time" time="0.002">
-    </testcase>
-    <testcase classname="/util/datetime/diffDateInUnit should return month preiod that does not care about time" name="/util/datetime/diffDateInUnit should return month preiod that does not care about time" time="0">
     </testcase>
   </testsuite>
 </testsuites>
