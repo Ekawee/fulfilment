@@ -3,12 +3,14 @@ import inventory from './inventory';
 import depositReceipt from './depositReceipt';
 import dispatchReceipt from './dispatchReceipt';
 import inventoryAudit from './inventoryAudit';
+import inventoryType from './inventoryType';
 
 const controllers = [
   inventory,
   depositReceipt,
   dispatchReceipt,
   inventoryAudit,
+  inventoryType,
 ];
 
 const controllerApi = express.Router();
