@@ -1,4 +1,4 @@
-import { getOr, map } from 'lodash/fp';
+import { getOr, map, compose, sum, last } from 'lodash/fp';
 import { DateTime } from 'luxon';
 import model from '../model';
 import service from '.';
@@ -70,7 +70,70 @@ const dispatchPrice = async (data, modelOptions) => {
   };
 };
 
+/*
+ * Calculate deposited inventory as requested for summary price before customer submittion.
+ * @return net amount and dispatch receipt number for payment
+ */
+const dispatch = async (data, modelOptions) => {
+
+  const pricing = await service.inventory.dispatchPrice(data, modelOptions);
+
+  const depositAmount = compose(
+    sum,
+    map((inventory) => (inventory.price))
+  )(pricing.inventoriesDepositedPrice);
+
+  const shipAmount = pricing.shipmentPrice;
+  const netAmount = depositAmount + shipAmount;
+
+  const dispatchReceiptNumber = service.dispatchReceipt.generateDepositReceiptNumber();
+
+  const dispatchReceiptPayload = {
+    dispatchReceiptNumber,
+    depositAmount,
+    shipAmount,
+    netAmount,
+    // customerId // TODO: need to get customer id from autherization header
+  };
+
+  const dispatchReceipt = await model.dispatchReceipt.create(dispatchReceiptPayload, modelOptions);
+
+  /*
+   * update inventories status
+   */
+  const inventoriesUpdated = await Promise.all(compose(
+    map(async (inventory) => {
+      const inventoryUpdatePayload = {
+        dispatchReceiptId: dispatchReceipt.id,
+        status: INVENTORY_AUDIT.STATUS.DISPATCHED,
+        dispatchedAt: DateTime.utc().toSQL(),
+        expectedAmount: inventory.price,
+      };
+      const inventoryUpdate = await model.inventory.update(
+        inventoryUpdatePayload,
+        {
+          where: {
+            id: inventory.id,
+          },
+          returning: true,
+          plain: true,
+          ...modelOptions,
+        },
+      );
+      return sequelizeUtil.modelToObject(last(inventoryUpdate));
+    })
+  )(pricing.inventoriesDepositedPrice));
+
+  await service.inventoryAudit.logUpdated(inventoriesUpdated, modelOptions);
+
+  return {
+    dispatchReceiptNumber,
+    netAmount,
+  };
+};
+
 export default {
   deposit,
   dispatchPrice,
+  dispatch,
 };
