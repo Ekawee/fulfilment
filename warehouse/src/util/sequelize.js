@@ -75,8 +75,8 @@ const withForeignKey = ({ model, key = 'id' }, sequelize) => ({
 });
 
 /*
- * append default attributes table
- * @param1 sequelize model object. to contain data/function
+ * transform sequelize model object to palin object.
+ * @param1 sequelize model object. to contain dataValues
  * @return object.
  */
 const modelToObject = (modelDataValue) => JSON.parse(JSON.stringify(modelDataValue || {}));
