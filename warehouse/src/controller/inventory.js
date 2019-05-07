@@ -262,6 +262,47 @@ router.get(
   }),
 );
 
+/**
+ * @swagger
+ * /dispatch-receipt/{id}/inventories:
+ *  get:
+ *    description: get inventory detail
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: dispatch receipt id
+ *        type: string
+ *    responses:
+ *      200:
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/definitions/baseInventory'
+ */
+router.get(
+  '/dispatch-receipt/:id/inventories',
+  machineAuthenticate,
+  validate({
+    id: Joi.string().valid(Joi.ref('$params.id')).required(),
+  }),
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        res.send(await service.inventory.getByDispatchReceiptPk(req.params.id, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while get inventories detail.', { error: JSON.stringify(req.params) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
+
 export default router;
 
 /**

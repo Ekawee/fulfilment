@@ -75,7 +75,7 @@ describe('/service/inventory/getByDepositeReceiptPk', () => {
         price: '2000',
         dayCount: '9',
       },
-    ]
+    ];
 
     model.inventory.findAll = jest.fn(
       ({ where: { depositReceiptId } }) => [find({ depositReceiptId })(mockInventoriesResponse)]
@@ -88,6 +88,78 @@ describe('/service/inventory/getByDepositeReceiptPk', () => {
       expect.objectContaining({
         where: expect.objectContaining({
           depositReceiptId: mockDepositReceiptId,
+        }),
+        ...mockModelOptions,
+      }),
+    );
+
+    // Return only index 0
+    expect(model.inventory.findAll).toHaveReturnedWith(
+      expect.arrayContaining([mockInventoriesResponse[0]]),
+    );
+
+    expect(model.inventory.findAll).toHaveBeenCalledTimes(1);
+
+    expect(result).toHaveLength(1);
+    expect(result).toEqual([mockInventoriesResponse[0]]);
+  });
+});
+
+describe('/service/inventory/getByDispatchReceiptPk', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should return invetories list by using dispatchReceiptId (found)', async () => {
+    const mockDispatchReceiptId = 'dispatch-receipt-1';
+
+    const mockModelOptions = {
+      transaction: 'transaction-id-12345',
+    };
+
+    const mockInventoriesResponse = [
+      {
+        id: 'inventory-id-1',
+        inventoryTypeId: '1',
+        depositReceiptId: '1',
+        dispatchReceiptId: 'dispatch-receipt-1',
+        width: '5',
+        height: '3',
+        length: '10',
+        weight: null,
+        depositedAt: '2019-05-02T14:30:20.000Z',
+        dispatchedAt: '2019-05-04T20:13:05.000Z',
+        expectedAmount: '300',
+        paidAmount: '300',
+        status: 'PAID',
+      },
+      {
+        id: 'inventory-id-2',
+        inventoryTypeId: '1',
+        depositReceiptId: '2',
+        dispatchReceiptId: 'dispatch-receipt-2',
+        width: '5',
+        height: '3',
+        length: '10',
+        weight: null,
+        depositedAt: '2019-05-02T14:30:20.000Z',
+        dispatchedAt: '2019-05-04T20:13:05.000Z',
+        expectedAmount: '300',
+        paidAmount: '300',
+        status: 'PAID',
+      },
+    ];
+
+    model.inventory.findAll = jest.fn(
+      ({ where: { dispatchReceiptId } }) => [find({ dispatchReceiptId })(mockInventoriesResponse)]
+      );
+
+    const result = await serviceInventory.getByDispatchReceiptPk(mockDispatchReceiptId, mockModelOptions);
+
+    expect(model.inventory.findAll).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: expect.objectContaining({
+          dispatchReceiptId: mockDispatchReceiptId,
         }),
         ...mockModelOptions,
       }),
