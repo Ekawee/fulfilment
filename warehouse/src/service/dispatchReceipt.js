@@ -73,7 +73,42 @@ const updatePaid = async (data, modelOptions) => {
   return sequelizeUtil.modelToObject(dispatchReceipt);
 };
 
+/*
+ * query summary data from dispatch receipt
+ * @param1 object to contain request query fields
+ * @return array to contain data object.
+ */
+const getDashboard = async (query, modelOptions) => {
+  const {
+    dispatchReceiptNumber,
+    limit = 10,
+    offset = 0,
+  } = query;
+  const rawSql = `
+    select
+      dr.*,
+      c.first_name, c.last_name, c.mobile_number, c.email,
+      (select count(*) from inventory where status IN ('DISPATCHED', 'PAID') and deposit_receipt_id = dr.id) as inventory_amount
+    from dispatch_receipt dr
+    left join customer c
+    on dr.customer_id = c.id
+    where 1=1
+    ${dispatchReceiptNumber ? `and dr.dispatch_receipt_number ilike '${dispatchReceiptNumber}'` : ''}
+    ${limit ? `limit ${limit}` : ''}
+    ${offset ? `offset ${offset}` : ''}
+  `;
+
+  const dashboardData = await model.sequelize.query(rawSql, {
+    type: model.sequelize.QueryTypes.SELECT,
+    raw: true,
+    ...modelOptions,
+  });
+
+  return sequelizeUtil.transformKeySnakeToCamelCase(dashboardData);
+};
+
 export default {
   updatePaid,
   generateDispatchReceiptNumber,
+  getDashboard,
 };
