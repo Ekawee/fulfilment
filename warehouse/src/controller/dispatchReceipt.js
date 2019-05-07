@@ -64,4 +64,12 @@ export default router;
  *          type: number
  *        inventoyAmount:
  *          type: number
+ *        firstName:
+ *          type: string
+ *        lastName:
+ *          type: string
+ *        mobileNumber:
+ *          type: string
+ *        email:
+ *          type: string
  */
