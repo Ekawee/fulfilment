@@ -86,7 +86,7 @@ const dispatch = async (data, modelOptions) => {
   const shipAmount = pricing.shipmentPrice;
   const netAmount = depositAmount + shipAmount;
 
-  const dispatchReceiptNumber = service.dispatchReceipt.generateDepositReceiptNumber();
+  const dispatchReceiptNumber = service.dispatchReceipt.generateDispatchReceiptNumber();
 
   const dispatchReceiptPayload = {
     dispatchReceiptNumber,

@@ -48,6 +48,11 @@ const inventoryDispatchSchema = {
   shipment: isObject.keys(createShipmentSchema),
 };
 
+const dispatchReceiptSchema = {
+  paymentReference: isString.required(),
+  dispatchReceiptNumber: isString.required(),
+};
+
 /**
  * @swagger
  * /inventory/deposit:
@@ -174,6 +179,48 @@ router.post(
   }),
 );
 
+/**
+ * @swagger
+ * /inventory/dispatch:
+ *  put:
+ *    description: update dispatch receipt when already paid
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *       - name: obj
+ *         description: payment info
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/requestUpdateDispatchReceipt'
+ *    responses:
+ *       200:
+ *         description: completed dispatch receipt info
+ *         schema:
+ *           $ref: '#/definitions/responseDispatchReceipt'
+*/
+router.put(
+  '/inventory/dispatch',
+  validate({
+    body: isObject.keys(dispatchReceiptSchema),
+  }),
+  machineAuthenticate,
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        const body = pick(keys(dispatchReceiptSchema), req.body);
+        res.send(await service.dispatchReceipt.updatePaid(body, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while updation dispatch deposited inventory after paid.', { error: toString(err), body: JSON.stringify(req.body) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
+
 export default router;
 
 /**
@@ -269,4 +316,28 @@ export default router;
  *          type: number
  *        dispatchReceiptNumber:
  *          type: string
+ *   requestUpdateDispatchReceipt:
+ *      type: object
+ *      properties:
+ *        paymentReference:
+ *          type: string
+ *        dispatchReceiptNumber:
+ *          type: string
+ *   responseDispatchReceipt:
+ *      type: object
+ *      properties:
+ *        customerId:
+ *          type: string
+ *        shipmentId:
+ *          type: string
+ *        dispatchReceiptNumber:
+ *          type: string
+ *        paymentReference:
+ *          type: string
+ *        depositAmount:
+ *          type: number
+ *        shipAmount:
+ *          type: number
+ *        netAmount:
+ *          type: number
  */
