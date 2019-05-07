@@ -21,7 +21,7 @@ const generateDepositReceiptNumber = compose(
  */
 const getDashboard = async (query, modelOptions) => {
   const {
-    depositeReceiptNumber,
+    depositReceiptNumber,
     limit = 10,
     offset = 0,
   } = query;
@@ -37,7 +37,7 @@ const getDashboard = async (query, modelOptions) => {
     join customer c
     on dr.customer_id = c.id
     where 1=1
-    ${depositeReceiptNumber ? `and dr.deposit_receipt_number ilike '${depositeReceiptNumber}'` : ''}
+    ${depositReceiptNumber ? `and dr.deposit_receipt_number ilike '${depositReceiptNumber}'` : ''}
     ${limit ? `limit ${limit}` : ''}
     ${offset ? `offset ${offset}` : ''}
   `;
