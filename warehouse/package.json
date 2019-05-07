@@ -104,7 +104,9 @@
       "cobertura"
     ],
     "collectCoverageFrom": [
-      "src/**/*.(js)"
+      "src/controller/*.(js)",
+      "src/service/*.(js)",
+      "src/util/*.(js)"
     ],
     "cacheDirectory": "./node_modules/.cache/jest",
     "moduleNameMapper": {
