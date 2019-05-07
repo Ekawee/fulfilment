@@ -1,5 +1,6 @@
 import { map } from 'lodash/fp';
 import model from '../model';
+import sequelizeUtil from '../util/sequelize';
 import { INVENTORY_AUDIT } from '../constants';
 
 /*
@@ -40,7 +41,18 @@ const logUpdated = async (inventories, modelOptions) => {
   return inventoryAudit;
 };
 
+const getByInventoryPk = async (id, modelOptions) => {
+  const audit = await model.inventoryAudit.findAll({
+    where: {
+      inventoryId: id,
+    },
+    ...modelOptions,
+  });
+  return sequelizeUtil.modelToObject(audit);
+};
+
 export default {
   logAdded,
   logUpdated,
+  getByInventoryPk,
 };
