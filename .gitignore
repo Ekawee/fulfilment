@@ -62,3 +62,6 @@ typings/
 
 # distribute
 dist
+
+# unit test report
+report
