@@ -6,6 +6,7 @@ import { INVENTORY_AUDIT } from '../../src/constants';
 jest.mock('../../src/model', () => ({
   inventoryAudit: {
     create: jest.fn(),
+    findAll: jest.fn(),
   },
 }));
 
@@ -153,6 +154,61 @@ describe('/service/inventoryAudit/logUpdated', () => {
 
     expect(model.inventoryAudit.create).not.toHaveBeenCalled();
     expect(result).toEqual(expectedResult);
+  });
+
+});
+
+describe('/service/inventoryAudit/getByInventoryPk', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should return records find by inventoryId', async () => {
+    const mockInvetoryId = 'inventory-id-1';
+
+    const mockModelOptions = {
+      transaction: 'transaction-id-12345',
+    };
+
+    const mockInventoryAudit = [
+      {
+        id: '1',
+        inventoryId: mockInvetoryId,
+        userId: '1',
+        action: 'ADDED',
+        status: 'DEPOSITED',
+        remark: null,
+      },
+      {
+        id: '2',
+        inventoryId: mockInvetoryId,
+        userId: '1',
+        action: 'UPDATED',
+        status: 'STORED',
+        remark: null,
+      },
+    ];
+
+    model.inventoryAudit.findAll = jest.fn(() => mockInventoryAudit);
+
+    const result = await serviceInventoryAudit.getByInventoryPk(mockInvetoryId, mockModelOptions);
+
+    expect(model.inventoryAudit.findAll).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: expect.objectContaining({
+          inventoryId: mockInvetoryId,
+        }),
+        ...mockModelOptions,
+      }),
+    );
+
+    expect(model.inventoryAudit.findAll).toHaveReturnedWith(
+      expect.objectContaining(mockInventoryAudit),
+    );
+
+    expect(model.inventoryAudit.findAll).toHaveBeenCalledTimes(1);
+
+    expect(result).toEqual(mockInventoryAudit);
   });
 
 });
