@@ -133,7 +133,7 @@ const dispatch = async (data, modelOptions) => {
 };
 
 /*
- * query list detail of inventories by using depositeR.
+ * query list detail of inventories by using depositeReceiptId.
  * @param1 string deposit receipt id.
  * @return array contain inventory detail include current price.
  */
@@ -162,9 +162,26 @@ const getByDepositeReceiptPk = async (id, modelOptions) => {
   return inventoriesWithPrice;
 };
 
+/*
+ * query list detail of inventories by using dispatchReceiptId.
+ * @param1 string dispatch receipt id.
+ * @return array contain inventory detail.
+ */
+const getByDispatchReceiptPk = async (id, modelOptions) => {
+  const inventories = await model.inventory.findAll({
+    where: {
+      dispatchReceiptId: id,
+    },
+    ...modelOptions,
+  });
+
+  return sequelizeUtil.modelToObject(inventories);
+};
+
 export default {
   deposit,
   dispatchPrice,
   dispatch,
   getByDepositeReceiptPk,
+  getByDispatchReceiptPk,
 };
