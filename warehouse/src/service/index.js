@@ -4,6 +4,7 @@ import customer from './customer';
 import depositReceipt from './depositReceipt';
 import customerAudit from './customerAudit';
 import pricing from './pricing';
+import dispatchReceipt from './depositReceipt';
 
 export default {
   inventory,
@@ -12,4 +13,5 @@ export default {
   inventoryAudit,
   customerAudit,
   pricing,
+  dispatchReceipt,
 };

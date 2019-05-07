@@ -132,6 +132,47 @@ router.post(
   }),
 );
 
+/**
+ * @swagger
+ * /inventory/dispatch:
+ *  post:
+ *    description: customer submittion dispatch inventory
+ *    tags: [Inventory]
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *       - name: obj
+ *         description: inventory item to want to dispatch
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/requestDispatchInventory'
+ *    responses:
+ *       200:
+ *         description: net price and dispatchReceiptNumber for request to payment service
+ *         schema:
+ *           $ref: '#/definitions/responseDispatchInventory'
+*/
+router.post(
+  '/inventory/dispatch',
+  validate({
+    body: isObject.keys(inventoryDispatchSchema),
+  }),
+  machineAuthenticate,
+  asyncWrapper(async (req, res) => {
+    try {
+      await model.sequelize.transaction(async (transaction) => {
+        const body = pick(keys(inventoryDispatchSchema), req.body);
+        res.send(await service.inventory.dispatch(body, { transaction }));
+      });
+    } catch (err) {
+      winston.logger.error('Error while sumittion dispatch deposited inventory.', { error: toString(err), body: JSON.stringify(req.body) });
+      res.status(500).send({
+        statusCode: 500,
+        description: toString(err),
+      });
+    }
+  }),
+);
 
 export default router;
 
@@ -221,4 +262,11 @@ export default router;
  *               type: number
  *       shipmentPrice:
  *          type: number
+ *   responseDispatchInventory:
+ *      type: object
+ *      properties:
+ *        netAmount:
+ *          type: number
+ *        dispatchReceiptNumber:
+ *          type: string
  */
