@@ -4,6 +4,7 @@ import depositReceipt from './depositReceipt';
 import dispatchReceipt from './dispatchReceipt';
 import inventoryAudit from './inventoryAudit';
 import inventoryType from './inventoryType';
+import payment from './payment';
 
 const controllers = [
   inventory,
@@ -11,6 +12,7 @@ const controllers = [
   dispatchReceipt,
   inventoryAudit,
   inventoryType,
+  payment,
 ];
 
 const controllerApi = express.Router();
