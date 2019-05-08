@@ -1,4 +1,4 @@
-import { map, omit } from 'lodash/fp';
+import { omit } from 'lodash/fp';
 import { DateTime } from 'luxon';
 import { Op } from 'sequelize';
 import model from '../model';
@@ -27,7 +27,7 @@ const getByPk = async (id, modelOptions) => {
       {
         model: model.inventoryType,
         as: 'inventoryType',
-      }
+      },
     ],
     ...modelOptions,
   });
