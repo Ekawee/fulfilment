@@ -5,10 +5,15 @@ This is a do testing from <a href="https://github.com/PandaMaru/backend-test-1?f
 
 Usage
 -------------
-#### Install
+#### Start Service
 There are 2 containers to run up. One for warehouse service and another one for database.
 ```
 $ docker-compose up warehouse
+```
+
+#### Down Service
+```
+$ docker-compose down
 ```
 
 #### API Access
