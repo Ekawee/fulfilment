@@ -6,7 +6,7 @@ This is a do testing from <a href="https://github.com/PandaMaru/backend-test-1?f
 Usage
 -------------
 #### Install
-There are 2 container to run up. One for warehouse service and another one for database.
+There are 2 containers to run up. One for warehouse service and another one for database.
 ```
 $ docker-compose up warehouse
 ```
@@ -18,19 +18,19 @@ http://localhost:9000/api/0.0.1/
 
 #### API
 ```
-GET /deposit-receipts
-GET /dispatch-receipts
-POST /inventory/deposit
-POST /inventory/dispatch/price
-POST /inventory/dispatch
-PUT /inventory/dispatch
-GET /deposit-receipt/{id}/inventories
-GET /dispatch-receipt/{id}/inventories
-GET /inventory/{id}
-GET /inventory/{id}/audit
-GET /inventoryType/{id}
-POST /payment/deposit
-GET /report/profit
+GET   /deposit-receipts
+GET   /dispatch-receipts
+POST  /inventory/deposit
+POST  /inventory/dispatch/price
+POST  /inventory/dispatch
+PUT   /inventory/dispatch
+GET   /deposit-receipt/{id}/inventories
+GET   /dispatch-receipt/{id}/inventories
+GET   /inventory/{id}
+GET   /inventory/{id}/audit
+GET   /inventoryType/{id}
+POST  /payment/deposit
+GET   /report/profit
 ```
 > **Tip:** Check it out the payload at online API document <a href="http://localhost:9000/api/0.0.1/api-docs" target="_blank">here</a>
 
