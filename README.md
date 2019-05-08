@@ -56,6 +56,7 @@ ER Diagram
 ![Image](http://lplaikhum.com/test/MyCloudFulfillment.jpg)
 > **Note:**
 > - Designed from microservices concept.
+> - Currently, payment service didn't implement yet. Because I want to focus on warehouse service as following requirement. However, payment service are place in warehouse service just for temporary.
 
 Roadmap
 -------------
